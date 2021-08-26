@@ -7,7 +7,7 @@ import userService from "../services/user.services";
 import userRepository from "../user.repository";
 import config from "../../../config/config";
 describe("User service", () => {
-  config.JWT_SECRET = "92jw0e97823"
+  config.JWT_SECRET = "92jw0e97823";
   const sandBox = sinon.createSandbox();
   afterEach(() => {
     resetStubAndSpys([sandBox]);
@@ -45,7 +45,6 @@ describe("User service", () => {
     sandBox.stub(userRepository, "findOne").resolves(false);
     sandBox.stub(userRepository, "create").resolves(data);
     const { isSuccess, user, message } = await userService.createAccount(data);
-    console.log(isSuccess, user, message)
     assert.ok("user" in user);
     assert.ok("token" in user);
     assert.deepStrictEqual(isSuccess, true);
