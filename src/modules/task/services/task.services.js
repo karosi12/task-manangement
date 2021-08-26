@@ -26,11 +26,12 @@ const createTask = async (data) => {
 
 /**
  * Find task
- * @param id
+ * @param param
  * @returns
  */
-const findTask = async (id) => {
+const findTask = async (param) => {
   try {
+    const { id } = param;
     let task = await taskRepository.findOne({ _id: id });
     if (!task) {
       return {
@@ -49,14 +50,16 @@ const findTask = async (id) => {
 };
 
 /**
- * Find task
+ * Update task
  * @param param
  * @returns
  */
 const updateTask = async (param) => {
   try {
     const { id, ...updateData } = param;
-    let task = await taskRepository.findOneAndUpdate({ _id: id }, updateData);
+    let task = await taskRepository.findOneAndUpdate({ _id: id }, updateData, {
+      new: true,
+    });
     if (!task) {
       return {
         isSuccess: false,
@@ -74,12 +77,13 @@ const updateTask = async (param) => {
 };
 
 /**
- * delete task
+ * Delete task
  * @param param
  * @returns
  */
-const deleteTask = async (id) => {
+const deleteTask = async (param) => {
   try {
+    const { id } = param;
     let task = await taskRepository.findByIdAndRemove({ _id: id });
     if (!task) {
       return {

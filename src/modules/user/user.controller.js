@@ -19,7 +19,7 @@ const createAccount = async (request, response) => {
   const { confirmPassword, ...signupData } = data,
     { isSuccess, message, user } = await userService.createAccount(signupData);
   if (isSuccess) {
-    return response.status(200).send(Response.success(200, message, user));
+    return response.status(201).send(Response.success(201, message, user));
   }
   return response.status(400).send(Response.error(400, message));
 };
