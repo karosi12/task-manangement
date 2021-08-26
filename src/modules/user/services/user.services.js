@@ -1,5 +1,8 @@
 import userRepository from "../user.repository";
-import { generateHash, validatePassword } from "../../shared/utils/hashPassword";
+import {
+  generateHash,
+  validatePassword,
+} from "../../shared/utils/hashPassword";
 import { generateJWT } from "../../shared/utils/generateToken";
 /**
  * Create user
