@@ -1,0 +1,24 @@
+version: "3"
+services:
+  api:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=test
+    volumes:
+      - db:/data/db
+
+volumes:
+  db:
+  app:

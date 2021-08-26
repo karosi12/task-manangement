@@ -5,8 +5,9 @@ import * as userMock from "../tests/mocks/user.mock";
 import * as hashPassword from "../../shared/utils/hashPassword";
 import userService from "../services/user.services";
 import userRepository from "../user.repository";
-
+import config from "../../../config/config";
 describe("User service", () => {
+  config.JWT_SECRET = "92jw0e97823";
   const sandBox = sinon.createSandbox();
   afterEach(() => {
     resetStubAndSpys([sandBox]);
