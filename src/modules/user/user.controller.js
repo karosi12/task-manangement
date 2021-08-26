@@ -24,4 +24,22 @@ const createAccount = async (request, response) => {
   return response.status(400).send(Response.error(400, message));
 };
 
-export default { createAccount };
+/**
+ * @description login user
+ * @param {Object} request - Http Request object
+ * @param {Object} response - Http Request object
+ * @returns {Object} return an object of a login user
+ */
+const login = async (request, response) => {
+  const { errors, data } = Validate(userSchemas.loginSchema, request.body);
+  if (errors) {
+    return response.status(400).send(Response.error(400, errors));
+  }
+  const { isSuccess, message, user } = await userService.login(data);
+  if (isSuccess) {
+    return response.status(200).send(Response.success(200, message, user));
+  }
+  return response.status(400).send(Response.error(400, message));
+};
+
+export default { createAccount, login };
