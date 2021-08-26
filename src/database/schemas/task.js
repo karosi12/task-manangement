@@ -6,18 +6,28 @@ const task = {
     required: true,
     trim: true,
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+    trim: true,
+  },
   description: {
     type: String,
     required: false,
     trim: true,
   },
-  taskTime: {
-    type: Date,
+  timeTaskShouldBeDoneInMinutes: {
+    type: Number,
     required: true,
   },
-  notificationTime: {
-    type: Date,
+  reminder: {
+    type: Number,
     required: true,
+  },
+  isCompleted: {
+    type: Boolean,
+    default: false,
   },
 };
 
