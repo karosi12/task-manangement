@@ -1,0 +1,16 @@
+# Dependency directories
+node_modules/
+
+# dotenv file
+.env
+
+.nyc_output
+.vscode
+coverage/
+
+dist/
+
+logs
+
+package-lock.json
+todo
