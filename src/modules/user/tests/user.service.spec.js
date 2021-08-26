@@ -5,13 +5,13 @@ import * as userMock from "../tests/mocks/user.mock";
 import userService from "../services/user.services";
 import userRepository from "../user.repository";
 
-describe("User Service", () => {
+describe("User service", () => {
   const sandBox = sinon.createSandbox();
   afterEach(() => {
     resetStubAndSpys([sandBox]);
   });
 
-  it("#sign up  - failure (payload is empty)", async () => {
+  it("#sign up - failure (payload is empty)", async () => {
     const data = { name: "", email: "", password: "" };
     sandBox.stub(userRepository, "findOne").resolves(false);
     const { isSuccess, user } = await userService.createAccount(data);
@@ -19,7 +19,7 @@ describe("User Service", () => {
     assert.deepStrictEqual(user, undefined);
   });
 
-  it("#sign up  - failure (payload is empty) message return: 'User already registered'", async () => {
+  it("#sign up - failure (message return: User already registered)", async () => {
     const data = userMock.signUpMockRequest;
     sandBox.stub(userRepository, "findOne").resolves(true);
     const { isSuccess, user, message } = await userService.createAccount(data);
@@ -28,7 +28,7 @@ describe("User Service", () => {
     assert.deepStrictEqual(message, "User already registered");
   });
 
-  it("#sign up  - failure (payload is empty) message return: 'Unable to create user'", async () => {
+  it("#sign up - failure (message return: Unable to create user)", async () => {
     const data = userMock.signUpMockRequest;
     sandBox.stub(userRepository, "findOne").resolves(false);
     sandBox.stub(userRepository, "create").resolves(false);
@@ -38,7 +38,7 @@ describe("User Service", () => {
     assert.deepStrictEqual(message, "Unable to create user");
   });
 
-  it("#Sign up  - success", async () => {
+  it("#Sign up - success (message return: User created successfully)", async () => {
     const data = userMock.signUpMockRequest;
     sandBox.stub(userRepository, "findOne").resolves(false);
     sandBox.stub(userRepository, "create").resolves(data);
