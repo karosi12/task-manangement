@@ -31,6 +31,11 @@ const userSchemas = {
     confirmPassword: confirmPasswordSchema.required(),
   }),
 
+  loginSchema: Joi.object().keys({
+    email: emailSchema,
+    password: passwordSchema.required(),
+  }),
+
   validateOptions: {
     abortEarly: false,
     stripUnknown: true,

@@ -2,6 +2,7 @@ const sinon = require("sinon");
 import * as assert from "assert";
 import { resetStubAndSpys } from "../../../tests/testHelper";
 import * as userMock from "../tests/mocks/user.mock";
+import * as hashPassword from "../../shared/utils/hashPassword";
 import userService from "../services/user.services";
 import userRepository from "../user.repository";
 
@@ -47,5 +48,35 @@ describe("User service", () => {
     assert.ok("token" in user);
     assert.deepStrictEqual(isSuccess, true);
     assert.deepStrictEqual(message, "User created successfully");
+  });
+
+  it("#login - failure (message return: Invalid credentials - user not found)", async () => {
+    const data = { email: "", password: "" };
+    sandBox.stub(userRepository, "findOne").resolves(false);
+    const { isSuccess, user, message } = await userService.login(data);
+    assert.deepStrictEqual(isSuccess, false);
+    assert.deepStrictEqual(user, undefined);
+    assert.deepStrictEqual(message, "Invalid credentials");
+  });
+
+  it("#Login - failure (message return: Invalid credentials - wrong password)", async () => {
+    const data = userMock.loginMockRequest;
+    sandBox.stub(userRepository, "findOne").resolves(true);
+    sandBox.stub(hashPassword, "validatePassword").returns(false);
+    const { isSuccess, user, message } = await userService.login(data);
+    assert.deepStrictEqual(isSuccess, false);
+    assert.deepStrictEqual(user, undefined);
+    assert.deepStrictEqual(message, "Invalid credentials");
+  });
+
+  it("#Login - success (message return: User login successfully)", async () => {
+    const data = userMock.loginMockRequest;
+    sandBox.stub(userRepository, "findOne").resolves(data);
+    sandBox.stub(hashPassword, "validatePassword").returns(true);
+    const { isSuccess, user, message } = await userService.login(data);
+    assert.ok("user" in user);
+    assert.ok("token" in user);
+    assert.deepStrictEqual(isSuccess, true);
+    assert.deepStrictEqual(message, "User login successfully");
   });
 });

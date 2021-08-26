@@ -1,5 +1,5 @@
 import userRepository from "../user.repository";
-import { generateHash } from "../../shared/utils/hashPassword";
+import { generateHash, validatePassword } from "../../shared/utils/hashPassword";
 import { generateJWT } from "../../shared/utils/generateToken";
 /**
  * Create user
@@ -31,8 +31,41 @@ const createAccount = async (data) => {
       message: "User created successfully",
     };
   } catch (error) {
-    return {isSuccess: false, message: error.message };
+    return { isSuccess: false, message: error.message };
   }
 };
 
-export default { createAccount };
+/**
+ * Login user
+ * @param data
+ * @returns
+ */
+const login = async (data) => {
+  try {
+    const { email, password } = data;
+    let user = await userRepository.findOne({ email });
+    if (!user) {
+      return {
+        isSuccess: false,
+        message: "Invalid credentials",
+      };
+    }
+    const passwordCheck = validatePassword(password, user.password);
+    if (!passwordCheck) {
+      return {
+        isSuccess: false,
+        message: "Invalid credentials",
+      };
+    }
+    const responseData = { user, token: generateJWT(user) };
+    return {
+      isSuccess: true,
+      user: responseData,
+      message: "User login successfully",
+    };
+  } catch (error) {
+    return { isSuccess: false, message: error.message };
+  }
+};
+
+export default { createAccount, login };
