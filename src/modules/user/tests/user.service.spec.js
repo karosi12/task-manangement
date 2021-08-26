@@ -7,6 +7,7 @@ import userService from "../services/user.services";
 import userRepository from "../user.repository";
 
 describe("User service", () => {
+  config.JWT_SECRET = "92jw0e97823"
   const sandBox = sinon.createSandbox();
   afterEach(() => {
     resetStubAndSpys([sandBox]);
