@@ -44,6 +44,7 @@ describe("User service", () => {
     sandBox.stub(userRepository, "findOne").resolves(false);
     sandBox.stub(userRepository, "create").resolves(data);
     const { isSuccess, user, message } = await userService.createAccount(data);
+    console.log(isSuccess, user, message)
     assert.ok("user" in user);
     assert.ok("token" in user);
     assert.deepStrictEqual(isSuccess, true);
