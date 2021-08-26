@@ -14,7 +14,7 @@
     "test": "npm run clean && cross-env NODE_ENV=test nyc --reporter=html mocha --require babel-core/register ./src/test/*.spec.js --timeout 50000 --exit && nyc report"
   },
   "dependencies": {
-    "bcryptjs": "2.4.3",
+    "bcrypt": "^5.0.1",
     "body-parser": "1.19.0",
     "cors": "2.8.5",
     "cron": "^1.8.2",
@@ -23,7 +23,7 @@
     "express": "4.16.4",
     "express-validator": "5.3.1",
     "helmet": "3.18.0",
-    "joi": "14.3.1",
+    "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "5.8.11",
     "morgan": "1.9.1",
