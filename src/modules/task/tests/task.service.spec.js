@@ -77,7 +77,7 @@ describe("Task service", () => {
     assert.deepStrictEqual(message, "Task updated successfully");
   });
 
-  it("#Deleted task - failure (task not found)", async () => {
+  it("#Deleted task - failure (task not deleted)", async () => {
     const data = {};
     sandBox.stub(taskRepository, "findByIdAndRemove").resolves(false);
     const { isSuccess, task, message } = await taskService.deleteTask(data);

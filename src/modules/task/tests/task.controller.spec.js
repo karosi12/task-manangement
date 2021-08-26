@@ -60,7 +60,6 @@ describe("Task Controller", () => {
       .resolves(taskMocks.createTaskMockRequest);
     await taskController.findTask(request, response);
     const responseData = response._getData();
-    console.log("responseData ->", responseData);
     assert.deepStrictEqual(response.statusCode, 200);
     assert.deepStrictEqual(responseData.message, "Task retrieved successfully");
   });
