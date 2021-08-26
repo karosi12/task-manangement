@@ -7,4 +7,9 @@ const signUpMockRequest = {
   name: faker.name.firstName(),
 };
 
-export { signUpMockRequest };
+const loginMockRequest = {
+  email: faker.internet.email(),
+  password: password,
+};
+
+export { signUpMockRequest, loginMockRequest };
