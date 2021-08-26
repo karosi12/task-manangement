@@ -3,12 +3,12 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+dotenv.config();
 import errorhandler from 'errorhandler';
 import expressValidator from 'express-validator';
 import helmet from 'helmet';
 import config from './config/config'
-
-dotenv.config();
+import router from './modules/shared/routes';
 
 const isProduction = config.isProduction === 'production';
 // Create global app Objects
@@ -27,7 +27,7 @@ if (!isProduction) {
   app.use(errorhandler());
 }
 
-// app.use(router);
+app.use("/api",router);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');

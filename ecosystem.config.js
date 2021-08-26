@@ -1,6 +1,6 @@
 module.exports = { 
     apps: [{
-      name    : "oda-finance-microservice",
+      name    : "task-management",
       script  : "npm",
       args    : "start"
     }]
