@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import authenticate from "./middlewares/authenticate";
 import user from "../user/user.routes";
 import task from "../task/task.routes";
 
@@ -8,5 +9,5 @@ router.get("/", (req, res) =>
 );
 
 router.use("/", user);
-router.use("/task", task);
+router.use("/task", authenticate, task);
 export default router;
