@@ -31,7 +31,7 @@ describe("Task service", () => {
 
   it("#Find task - failure (task not found)", async () => {
     const data = {};
-    sandBox.stub(taskRepository, "findOne").resolves(false);
+    sandBox.stub(taskRepository, "findOne").returns({ populate: () => false });
     const { isSuccess, task, message } = await taskService.findTask(data);
     assert.deepStrictEqual(isSuccess, false);
     assert.deepStrictEqual(task, undefined);
@@ -46,7 +46,7 @@ describe("Task service", () => {
       reminder: 20,
       userId: "606594de9a2f2b23a8b163e5",
     };
-    sandBox.stub(taskRepository, "findOne").resolves(data);
+    sandBox.stub(taskRepository, "findOne").returns({ populate: () => data });
     const { isSuccess, task, message } = await taskService.findTask(data);
     assert.deepStrictEqual(isSuccess, true);
     assert.deepStrictEqual(task, data);

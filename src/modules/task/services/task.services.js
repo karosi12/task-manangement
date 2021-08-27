@@ -32,7 +32,9 @@ const createTask = async (data) => {
 const findTask = async (param) => {
   try {
     const { id } = param;
-    let task = await taskRepository.findOne({ _id: id });
+    let task = await taskRepository
+      .findOne({ _id: id })
+      .populate([{ path: "userId", select: "email name" }]);
     if (!task) {
       return {
         isSuccess: false,
