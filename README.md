@@ -4,7 +4,7 @@ A simple task management system with authentication, using technologies like Nod
 
 ##
 
-API Endpoint:
+API Endpoint:https://task-management-12.herokuapp.com/api
 
 # Technologies Used
 
@@ -54,7 +54,7 @@ API Endpoint:
 - JWT_SECRET=
 - NODE_ENV=
 
-API Endpoint: 
+API Endpoint: https://task-management-12.herokuapp.com/api
 
 ## AUTHOR
 
