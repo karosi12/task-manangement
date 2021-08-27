@@ -57,7 +57,7 @@ describe("Task Controller", () => {
     const response = httpMocks.createResponse();
     sandBox
       .stub(taskRepository, "findOne")
-      .resolves(taskMocks.createTaskMockRequest);
+      .returns({ populate: () => taskMocks.createTaskMockRequest });
     await taskController.findTask(request, response);
     const responseData = response._getData();
     assert.deepStrictEqual(response.statusCode, 200);
