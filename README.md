@@ -33,7 +33,7 @@ API Endpoint:https://task-management-12.herokuapp.com/api
 | DELETE /api/task/\<task_id>                | delete a task     |
 
 
-[Task management](https://documenter.getpostman.com/view/10646382/TVeiDqke)
+[Task management](https://documenter.getpostman.com/view/16184222/U16bwUQ7#intro)
 
 # To Install
 
